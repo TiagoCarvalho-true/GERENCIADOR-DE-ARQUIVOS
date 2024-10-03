@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Arquivo - {{ filename }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Editando: {{ filename }}</h1>
+
+    <!-- Formulário para editar o conteúdo do arquivo -->
+    <form action="/save/{{ filename }}" method="post">
+        <textarea name="content" rows="20" cols="80">{{ content }}</textarea><br>
+        <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <a href="/">Voltar</a>
+</body>
+</html>

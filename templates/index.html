@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Arquivos</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Gerenciador de Arquivos</h1>
+
+    <!-- Formulário para upload de arquivos -->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Arquivos:</h2>
+    <ul>
+        {% for arquivo in arquivos %}
+            <li>
+                {{ arquivo }}
+                <!-- Botão para editar o arquivo -->
+                <a href="/edit/{{ arquivo }}">Editar</a>
+                <!-- Botão para download do arquivo -->
+                <a href="/download/{{ arquivo }}">Download</a>
+                <!-- Botão para excluir o arquivo -->
+                <form action="/delete/{{ arquivo }}" method="post" style="display:inline;">
+                    <button type="submit">Excluir</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>
