@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Gerenciador de Arquivos</h1>
+    <h1>Gerenciador de Arquivos Fodastico</h1>
 
     <!-- Formulário para upload de arquivos -->
     <form action="/upload" method="post" enctype="multipart/form-data">
@@ -31,18 +31,5 @@
             </li>
         {% endfor %}
     </ul>
-
-
-
-    <!-- Flash messages -->
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
 </body>
 </html>

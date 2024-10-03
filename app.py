@@ -20,10 +20,12 @@ def index():
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
+        flash('Nenhum arquivo selecionado.')
         return redirect(request.url)
     file = request.files['file']
     if file.filename != '':
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        flash(f'O arquivo {file.filename} foi carregado com sucesso!')
     return redirect(url_for('index'))
 
 # Rota para excluir arquivos
@@ -32,6 +34,9 @@ def delete_file(filename):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     if os.path.exists(file_path):
         os.remove(file_path)
+        flash(f'O arquivo {filename} foi excluído com sucesso!')
+    else:
+        flash('Arquivo não encontrado.')
     return redirect(url_for('index'))
 
 # Rota para download de arquivos
@@ -104,4 +109,3 @@ if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
     app.run(debug=True)
-
