@@ -1,1 +1,1 @@
-Este projeto se trata de um gerenciador de arquivos funcional para materia Sistemas Operacinais solicitado pelo professor a fim de mostrar aos alunos como criar uma pagina utilizando linguagens diferentes para obtermos mais conhecimento em  diversas linguagens.
+Este projeto se trata de um gerenciador de arquivos funcional para materia de Sistemas Operacinais solicitado pelo professor a fim de mostrar aos alunos como criar uma pagina utilizando linguagens diferentes, em geral, no gerencimento de entrada e saida de arquivos.
