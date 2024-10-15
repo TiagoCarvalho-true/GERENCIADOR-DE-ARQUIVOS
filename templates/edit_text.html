@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Editar Arquivo - {{ filename }}</title>
 </head>
+
 <body>
-    <h1>Editando: {{ filename }}</h1>
+    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+    <div class="container-main">
+        <img class="ruby-hoshino" src="/gif/ruby-hoshino.gif" alt="ruby dançando">
+        <h1>Editando: {{ filename }}</h1>
 
-    <form action="/save/{{ filename }}" method="post">
-        <textarea name="content" rows="20" cols="80">{{ content }}</textarea><br>
-        <button type="submit">Salvar Alterações</button>
-    </form>
+        <form action="/save/{{ filename }}" method="post">
+            <textarea name="content" rows=10" cols="60">{{ content }}</textarea><br>
+            <button type="submit">Salvar Alterações</button>
+        </form>
 
-    <a href="/">Voltar</a>
+        <a href="/">Voltar</a>
+    </div>
+    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
 </body>
+
 </html>

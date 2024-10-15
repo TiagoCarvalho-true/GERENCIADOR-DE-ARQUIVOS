@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Visualizar Planilha - {{ filename }}</title>
 </head>
+
 <body>
-    <h1>Visualizando: {{ filename }}</h1>
-    {{ content|safe }}<br>
-    <a href="/">Voltar</a>
+    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+    <div class="container-main">
+        <img class="ruby-hoshino" src="/gif/ruby-hoshino.gif" alt="ruby dançando">
+        <h1>Visualizando: {{ filename }}</h1>
+        {{ content|safe }}<br>
+        <a href="/">Voltar</a>
+    </div>
+    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
 </body>
+
 </html>

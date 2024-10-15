@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Visualizar Imagem - {{ filename }}</title>
 </head>
-<body>
-    <h1>Visualizando: {{ filename }}</h1>
-    <img src="/uploads/{{ filename }}" alt="{{ filename }}" style="max-width:100%;"><br>
-    <a href="/">Voltar</a>
-</body>
-</html>
 
+<body>
+    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+    <div class="container-main">
+        <img class="ruby-hoshino" src="/gif/ruby-hoshino.gif" alt="ruby dançando">
+        <h1>Visualizando: {{ filename }}</h1>
+        <img src="/uploads/{{ filename }}" alt="{{ filename }}" style="max-width:100%;"><br>
+        <a href="/">Voltar</a>
+    </div>
+    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+</body>
+
+</html>
