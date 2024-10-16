@@ -1,3 +1,0 @@
-baka baka    if not file_path.endswith('.txt'):
-        flash('Somente arquivos .txt podem ser editados.')
-        return redirect(url_for('index'))

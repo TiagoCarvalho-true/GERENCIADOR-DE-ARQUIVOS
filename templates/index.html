@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerenciador de Arquivos</title>
     <link rel="stylesheet" href="/static/style.css" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico.png') }}">
+
 </head>
 
 <body>
 
-    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
     <div class="container-main">
-        <img class="ruby-hoshino" src="/gif/ruby-hoshino.gif" alt="ruby dançando">
+        <img class="ruby-hoshino" src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}" alt="ruby dançando">
         <div class="form-container">
             <!-- Formulário para upload de arquivos -->
             <form class="form-upload" action="/upload" method="post" enctype="multipart/form-data">
@@ -43,7 +45,7 @@
         </div>
     </div>
 
-    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
 </body>
 
 </html>

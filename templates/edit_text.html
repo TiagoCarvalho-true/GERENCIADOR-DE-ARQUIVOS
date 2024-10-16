@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
     <div class="container-main">
-        <img class="ruby-hoshino" src="/gif/ruby-hoshino.gif" alt="ruby dançando">
+        <img class="ruby-hoshino" src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}" alt="ruby dançando">
         <h1>Editando: {{ filename }}</h1>
 
         <form action="/save/{{ filename }}" method="post">
@@ -21,7 +21,7 @@
 
         <a href="/">Voltar</a>
     </div>
-    <img class="ai-hoshino" src="/gif/ai-hoshino.gif" alt="">
+    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
 </body>
 
 </html>
