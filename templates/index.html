@@ -1,51 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='ico.png') }}"
+    />
     <title>Gerenciador de Arquivos</title>
     <link rel="stylesheet" href="/static/style.css" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico.png') }}">
+  </head>
 
-</head>
-
-<body>
-
-    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
+  <body>
+    <img
+      class="ai-hoshino"
+      src="{{ url_for('static', filename='images/ai-hoshino.gif') }}"
+      alt=""
+    />
     <div class="container-main">
-        <img class="ruby-hoshino" src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}" alt="ruby dançando">
-        <div class="form-container">
-            <!-- Formulário para upload de arquivos -->
-            <form class="form-upload" action="/upload" method="post" enctype="multipart/form-data">
-                <h1>Gerenciador de Arquivos Fodastico</h1>
+      <img
+        class="ruby-hoshino"
+        src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}"
+        alt="ruby dançando"
+      />
+      <div class="form-container">
+        <!-- Formulário para upload de arquivos -->
+        <form
+          class="form-upload"
+          action="/upload"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <h1>Gerenciador de Arquivos Fodastico</h1>
 
-                <input type="file" name="file" />
-                <button type="submit">Upload</button>
+          <input type="file" name="file" />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <div class="crud-manager">
+        <h2>Arquivos</h2>
+        <ul>
+          <!-- {% for arquivo in arquivos %} -->
+          <li>
+            <!-- {{ arquivo }} -->
+
+            <img
+              src="{{ url_for('static', filename='icons/' + get_file_icon(arquivo)) }}"
+              alt="Icon"
+              width="20"
+            />
+            <!-- Botão para editar o arquivo -->
+            <a href="/edit/{{ arquivo }}">Editar</a>
+            <!-- Botão para download do arquivo -->
+            <a href="/download/{{ arquivo }}">Download</a>
+            <!-- Botão para excluir o arquivo -->
+            <form
+              action="/delete/{{ arquivo }}"
+              method="post"
+              style="display: inline"
+            >
+              <button type="submit">Excluir</button>
             </form>
-        </div>
-
-        <div class="crud-manager">
-            <h2>Arquivos</h2>
-            <ul>
-                <!-- {% for arquivo in arquivos %} -->
-                <li>
-                    <!-- {{ arquivo }} -->
-                    <!-- Botão para editar o arquivo -->
-                    <a href="/edit/{{ arquivo }}">Editar</a>
-                    <!-- Botão para download do arquivo -->
-                    <a href="/download/{{ arquivo }}">Download</a>
-                    <!-- Botão para excluir o arquivo -->
-                    <form action="/delete/{{ arquivo }}" method="post" style="display: inline">
-                        <button type="submit">Excluir</button>
-                    </form>
-                </li>
-                <!-- {% endfor %} -->
-            </ul>
-        </div>
+          </li>
+          <!-- {% endfor %} -->
+        </ul>
+      </div>
     </div>
 
-    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
-</body>
-
+    <img
+      class="ai-hoshino"
+      src="{{ url_for('static', filename='images/ai-hoshino.gif') }}"
+      alt=""
+    />
+  </body>
 </html>

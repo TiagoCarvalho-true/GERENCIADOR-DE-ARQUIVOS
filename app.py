@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory, flash
 from docx import Document
+from bs4 import BeautifulSoup
 import pandas as pd
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/')
 def index():
     arquivos = os.listdir(app.config['UPLOAD_FOLDER'])
-    return render_template('index.html', arquivos=arquivos)
+    return render_template('index.html', arquivos=arquivos, get_file_icon=get_file_icon)
 
 # Rota para upload de arquivos
 @app.route('/upload', methods=['POST'])
@@ -58,6 +59,25 @@ def get_file_type(filename):
     else:
         return 'unsupported'
 
+def get_file_icon(filename):
+    ext = filename.split('.')[-1].lower()
+    icons = {
+        'txt': 'text-icon.png',
+        'md': 'text-icon.png',
+        'csv': 'spreadsheet-icon.png',
+        'html': 'html-icon.png',
+        'css': 'css-icon.png',
+        'js': 'js-icon.png',
+        'py': 'python-icon.png',
+        'docx': 'word-icon.png',
+        'xlsx': 'excel-icon.png',
+        'png': 'image-icon.png',
+        'jpg': 'image-icon.png',
+        'jpeg': 'image-icon.png',
+        'gif': 'image-icon.png'
+    }
+    return icons.get(ext, 'unknown-icon.png')
+
 # Rota para abrir um arquivo para edição ou visualização
 @app.route('/edit/<filename>', methods=['GET'])
 def edit_file(filename):
@@ -90,17 +110,29 @@ def edit_file(filename):
 def save_file(filename):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file_type = get_file_type(filename)
-    new_content = request.form['content']
     
     if file_type == 'text':
+        new_content = request.form['content']
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(new_content)
         flash(f'O arquivo {filename} foi salvo com sucesso!')
+    
     elif file_type == 'docx':
+        # Extrair o texto do conteúdo HTML usando BeautifulSoup para remover tags HTML
+        new_content = request.form['content']
+        soup = BeautifulSoup(new_content, "html.parser")
+        plain_text = soup.get_text()
+
         doc = Document()
-        for line in new_content.split('\n'):
+        for line in plain_text.split('\n'):
             doc.add_paragraph(line)
         doc.save(file_path)
+        flash(f'O arquivo {filename} foi salvo com sucesso!')
+    
+    elif file_type == 'spreadsheet':
+        content = request.get_json().get('content')
+        df = pd.DataFrame(content)
+        df.to_excel(file_path, index=False)
         flash(f'O arquivo {filename} foi salvo com sucesso!')
     
     return redirect(url_for('index'))

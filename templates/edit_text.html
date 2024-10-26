@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='ico.png') }}"
+    />
     <title>Editar Arquivo - {{ filename }}</title>
-</head>
+    <script
+      src="https://cdn.tiny.cloud/1/w4lnp4uvs96lh3870036ex5gkizt173ujiwcdfrioj3d20fe/tinymce/6/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+  </head>
 
-<body>
-    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
+  <body>
+    <img
+      class="ai-hoshino"
+      src="{{ url_for('static', filename='images/ai-hoshino.gif') }}"
+      alt=""
+    />
     <div class="container-main">
-        <img class="ruby-hoshino" src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}" alt="ruby dançando">
-        <h1>Editando: {{ filename }}</h1>
+      <img
+        class="ruby-hoshino"
+        src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}"
+        alt="ruby dançando"
+      />
+      <h1>Editando: {{ filename }}</h1>
 
-        <form action="/save/{{ filename }}" method="post">
-            <textarea name="content" rows=10" cols="60">{{ content }}</textarea><br>
-            <button type="submit">Salvar Alterações</button>
-        </form>
+      <form
+        action="{{ url_for('save_file', filename=filename) }}"
+        method="post"
+      >
+        <textarea id="editor" name="content">{{ content }}</textarea>
+        <button type="submit">Salvar</button>
+      </form>
 
-        <a href="/">Voltar</a>
+      <a href="/">Voltar</a>
     </div>
-    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
-</body>
+    <img
+      class="ai-hoshino"
+      src="{{ url_for('static', filename='images/ai-hoshino.gif') }}"
+      alt=""
+    />
 
+    <script>
+      tinymce.init({
+        selector: "#editor",
+        plugins:
+          "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        toolbar_mode: "floating",
+        height: 500,
+      });
+    </script>
+  </body>
 </html>

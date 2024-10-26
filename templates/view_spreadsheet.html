@@ -1,22 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='ico.png') }}"
+    />
     <title>Visualizar Planilha - {{ filename }}</title>
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/handsontable@11.1.0/dist/handsontable.full.min.css"
+    />
+  </head>
 
-<body>
-    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
+  <body>
+    <div id="spreadsheet"></div>
+    <button id="save-btn">Salvar</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/handsontable@11.1.0/dist/handsontable.full.min.js"></script>
+    <script>
+      const data = {{ content|safe }}; // Conteúdo da planilha vindo do Python como JSON
+      const container = document.getElementById('spreadsheet');
+      const hot = new Handsontable(container, {
+          data: data,
+          rowHeaders: true,
+          colHeaders: true,
+          minSpareRows: 1,
+          contextMenu: true,
+          licenseKey: 'non-commercial-and-evaluation' // Necessário para usar a versão gratuita
+      });
+
+      document.getElementById('save-btn').addEventListener('click', () => {
+          const updatedData = hot.getData();
+          fetch('{{ url_for("save_file", filename=filename) }}', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({content: updatedData})
+          }).then(response => response.json()).then(data => {
+              alert(data.message);
+          });
+      });
+    </script>
+
+    <img
+      class="ai-hoshino"
+      src="{{ url_for('static', filename='images/ai-hoshino.gif') }}"
+      alt=""
+    />
     <div class="container-main">
-        <img class="ruby-hoshino" src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}" alt="ruby dançando">
-        <h1>Visualizando: {{ filename }}</h1>
-        {{ content|safe }}<br>
-        <a href="/">Voltar</a>
+      <img
+        class="ruby-hoshino"
+        src="{{ url_for('static', filename='images/ruby-hoshino.gif') }}"
+        alt="ruby dançando"
+      />
+      <h1>Visualizando: {{ filename }}</h1>
+      {{ content|safe }}<br />
+      <a href="/">Voltar</a>
     </div>
-    <img class="ai-hoshino" src="{{ url_for('static', filename='images/ai-hoshino.gif') }}" alt="">
-</body>
-
+    <img
+      class="ai-hoshino"
+      src="{{ url_for('static', filename='images/ai-hoshino.gif') }}"
+      alt=""
+    />
+  </body>
 </html>
